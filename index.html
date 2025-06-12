@@ -6,7 +6,11 @@
   <title>TP Tickets Partner - Ваш помічник для подій</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
   <style>
     .frosted-glass {
       background: rgba(255, 255, 255, 0.1);
@@ -28,92 +32,179 @@
     .scroll-to-top.visible {
       opacity: 1;
     }
+    .parallax-bg {
+      background-attachment: fixed;
+      background-size: cover;
+    }
   </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
   <!-- Header -->
   <header class="sticky-nav frosted-glass py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
-      <img src="https://i.ibb.co/mrzTy4qx/image.png" alt="TP Tickets Partner Logo" class="h-12" id="logo">
+      <img src="https://i.ibb.co/mrzTy4qx/image.png" alt="TP Tickets Partner Logo" class="h-12">
       <nav class="space-x-6">
         <a href="#features" class="text-lg hover:text-blue-600 transition">Можливості</a>
         <a href="#pricing" class="text-lg hover:text-blue-600 transition">Ціна</a>
         <a href="#reviews" class="text-lg hover:text-blue-600 transition">Відгуки</a>
+        <a href="#how-to-start" class="text-lg hover:text-blue-600 transition">Як почати</a>
         <a href="#faq" class="text-lg hover:text-blue-600 transition">FAQ</a>
       </nav>
       <a href="https://t.me/TPTicketsBot" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Спробувати</a>
     </div>
   </header>
 
-  <!-- Hero Section with 3D Logo -->
-  <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
+  <!-- Hero Section with 3D Planet -->
+  <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 parallax-bg">
     <div class="container mx-auto px-4 text-center">
-      <div id="logo-3d" class="h-64"></div>
+      <div id="planet-3d" class="h-64"></div>
       <h1 class="text-5xl font-bold mb-4 animate-fade-in">TP Tickets Partner</h1>
-      <p class="text-xl mb-6 animate-fade-in delay-200">Ваш розумний помічник для організації подій: квитки, реєстрація та нагадування через месенджери</p>
+      <p class="text-xl mb-6 animate-fade-in delay-200">Автоматизуйте продаж квитків, реєстрацію та нагадування через Telegram</p>
       <a href="https://t.me/TPTicketsBot" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg hover:bg-blue-700 transition animate-fade-in delay-400">Спробувати безкоштовно</a>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="py-16 bg-white">
+  <!-- Advantages Section -->
+  <section id="advantages" class="py-16 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Можливості TP Tickets Partner</h2>
+      <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Чому TP Tickets Partner?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-200">
+          <h3 class="text-2xl font-semibold mb-4">TP Tickets Partner</h3>
+          <ul class="list-disc pl-6">
+            <li>85% залученості в Telegram</li>
+            <li>Щоденні виплати</li>
+            <li>5 хвилин на запуск події</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-400">
+          <h3 class="text-2xl font-semibold mb-4">Інші сервіси</h3>
+          <ul class="list-disc pl-6">
+            <li>Гості ігнорують імейли</li>
+            <li>Повільні виплати</li>
+            <li>Потрібно 3–5 сервісів</li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center mt-12 animate-slide-up delay-600">
+        <p class="text-3xl font-bold">750+ подій проведено</p>
+        <p class="text-xl">10k+ учасників залучено, 4x вища залученість, ніж в імейлах</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Можливості</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-200">
           <h3 class="text-2xl font-semibold mb-4">Стильна сторінка події</h3>
-          <p>Автоматично генеруйте сучасні сторінки подій, оптимізовані для мобільних пристроїв.</p>
+          <p>Автоматично створена сторінка, оптимізована для мобільних.</p>
         </div>
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-400">
           <h3 class="text-2xl font-semibold mb-4">Продаж квитків</h3>
-          <p>Легко продавайте квитки онлайн з підтримкою промокодів та знижок.</p>
+          <p>Онлайн-продаж з промокодами та знижками.</p>
         </div>
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-600">
-          <h3 class="text-2xl font-semibold mb-4">Реєстрація через месенджери</h3>
-          <p>Забудьте про форми — ваші гості реєструються через Telegram або WhatsApp.</p>
+          <h3 class="text-2xl font-semibold mb-4">Реєстрація через Telegram</h3>
+          <p>Проста реєстрація через чат-бот.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-800">
+          <h3 class="text-2xl font-semibold mb-4">QR-сканування</h3>
+          <p>Скануйте квитки з телефону, без обладнання.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1000">
+          <h3 class="text-2xl font-semibold mb-4">Авто-нагадування</h3>
+          <p>Нагадування гостям про подію.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1200">
+          <h3 class="text-2xl font-semibold mb-4">Збір фідбеку</h3>
+          <p>Автоматична форма фідбеку, 47% відповідей.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Pricing Section -->
-  <section id="pricing" class="py-16 bg-gray-50">
+  <section id="pricing" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Прозоре ціноутворення</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-200">
           <h3 class="text-2xl font-semibold mb-4">Free</h3>
           <p class="text-3xl font-bold mb-4">$0 / місяць</p>
-          <p>Для безкоштовних та благодійних подій з базовими функціями.</p>
-          <a href="https://t.me/TPTicketsBot" class="block mt-4 bg-blue-600 text-white px-6 py-2 rounded-full text-center hover:bg-blue-700 transition">Почати</a>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Реєстрація учасників</li>
+            <li>Чекіни та QR-сканування</li>
+            <li>Збір фідбеку</li>
+          </ul>
+          <a href="https://t.me/TPTicketsBot" class="block bg-blue-600 text-white px-6 py-2 rounded-full text-center hover:bg-blue-700 transition">Почати</a>
         </div>
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-400">
           <h3 class="text-2xl font-semibold mb-4">Pro</h3>
           <p class="text-3xl font-bold mb-4">6% / квиток</p>
-          <p>Повний функціонал для комерційних подій.</p>
-          <a href="https://t.me/TPTicketsBot" class="block mt-4 bg-blue-600 text-white px-6 py-2 rounded-full text-center hover:bg-blue-700 transition">Почати</a>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Повний функціонал</li>
+            <li>Оплати та виплати</li>
+            <li>Керування командою</li>
+          </ul>
+          <a href="https://t.me/TPTicketsBot" class="block bg-blue-600 text-white px-6 py-2 rounded-full text-center hover:bg-blue-700 transition">Почати</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Reviews Section -->
-  <section id="reviews" class="py-16 bg-white">
+  <!-- Reviews Section (Slider) -->
+  <section id="reviews" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Що кажуть організатори</h2>
+      <div class="swiper reviews-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide p-6 rounded-lg frosted-glass">
+            <p class="italic">"Зекономила години рутини завдяки TP Tickets Partner!"</p>
+            <p class="mt-4 font-semibold">Емілія, організатор мітапів</p>
+          </div>
+          <div class="swiper-slide p-6 rounded-lg frosted-glass">
+            <p class="italic">"Гості люблять квитки в Telegram."</p>
+            <p class="mt-4 font-semibold">Андрій, Marketing Coffee</p>
+          </div>
+          <div class="swiper-slide p-6 rounded-lg frosted-glass">
+            <p class="italic">"Реєстрація стала втричі швидшою!"</p>
+            <p class="mt-4 font-semibold">Данило, воркшопи</p>
+          </div>
+          <div class="swiper-slide p-6 rounded-lg frosted-glass">
+            <p class="italic">"100 гостей на мітапах Wtech — усе ідеально!"</p>
+            <p class="mt-4 font-semibold">Аліна, Wtech</p>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Start Section -->
+  <section id="how-to-start" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Як почати</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-200">
-          <p class="italic">"TP Tickets Partner заощадив мені години рутинної роботи!"</p>
-          <p class="mt-4 font-semibold">Емілія, організатор мітапів</p>
+          <h3 class="text-2xl font-semibold mb-4">Завантажте бот</h3>
+          <p>Створіть акаунт у Telegram-боті та додайте подію.</p>
         </div>
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-400">
-          <p class="italic">"Гості люблять отримувати квитки прямо в Telegram."</p>
-          <p class="mt-4 font-semibold">Андрій, Marketing Coffee</p>
+          <h3 class="text-2xl font-semibold mb-4">Поширте посилання</h3>
+          <p>Поділіться посиланням на подію в соцмережах.</p>
         </div>
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-600">
-          <p class="italic">"Швидкість реєстрації зросла втричі!"</p>
-          <p class="mt-4 font-semibold">Данило, організатор воркшопів</p>
+          <h3 class="text-2xl font-semibold mb-4">Керуйте подією</h3>
+          <p>Стежте за оплатами та чекінами в реальному часі.</p>
         </div>
+      </div>
+      <div class="text-center mt-12">
+        <a href="https://t.me/TPTicketsBot" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg hover:bg-blue-700 transition">Почати зараз</a>
       </div>
     </div>
   </section>
@@ -122,14 +213,34 @@
   <section id="faq" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-bold text-center mb-12 animate-slide-up">Поширені запитання</h2>
-      <div class="space-y-4">
+      <div x-data="{ open: null }" class="space-y-4">
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-200">
-          <h3 class="text-xl font-semibold mb-2">Як швидко запустити подію?</h3>
-          <p>Створіть подію за 5 хвилин через наш Telegram-бот.</p>
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 1 ? null : 1">Як швидко запустити подію?</h3>
+          <p x-show="open === 1" x-transition>За 5 хвилин через Telegram-бот, без технічних знань.</p>
         </div>
         <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-400">
-          <h3 class="text-xl font-semibold mb-2">Чи потрібен сайт?</h3>
-          <p>Ні, все працює через месенджери та автоматично створену сторінку події.</p>
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 2 ? null : 2">Чи можу я затверджувати учасників?</h3>
+          <p x-show="open === 2" x-transition>Так, ви можете перевіряти заявки перед видачею квитків.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-600">
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 3 ? null : 3">Як продавати квитки через Telegram?</h3>
+          <p x-show="open === 3" x-transition>Бот автоматично обробляє оплати та надсилає квитки.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-800">
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 4 ? null : 4">Чи потрібен сайт?</h3>
+          <p x-show="open === 4" x-transition>Ні, усе працює через Telegram та сторінку події.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1000">
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 5 ? null : 5">Як працюють виплати?</h3>
+          <p x-show="open === 5" x-transition>Щоденні виплати на ваш рахунок, прозора аналітика.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1200">
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 6 ? null : 6">Чи потрібно гостям щось встановлювати?</h3>
+          <p x-show="open === 6" x-transition>Ні, усе працює в Telegram.</p>
+        </div>
+        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1400">
+          <h3 class="text-xl font-semibold mb-2 cursor-pointer" @click="open = open === 7 ? null : 7">Що робити, якщо виникнуть проблеми?</h3>
+          <p x-show="open === 7" x-transition>Зверніться до підтримки через Telegram, відповідь за 10 хвилин.</p>
         </div>
       </div>
     </div>
@@ -138,9 +249,19 @@
   <!-- Footer -->
   <footer class="py-8 bg-gray-800 text-white">
     <div class="container mx-auto px-4 text-center">
-      <p>© TP Tickets Partner, Київ, Україна, 2025. Усі права захищено.</p>
-      <a href="#" class="text-blue-400 hover:underline">Політика конфіденційності</a> | 
-      <a href="#" class="text-blue-400 hover:underline">Оферта</a>
+      <p>© TP Tickets Partner, Київ, Україна, 2025</p>
+      <div class="mt-2">
+        <a href="#" class="text-blue-400 hover:underline">Політика конфіденційності</a> | 
+        <a href="#" class="text-blue-400 hover:underline">Оферта</a>
+      </div>
+      <div class="mt-4 flex justify-center space-x-4">
+        <a href="https://t.me/TPTicketsBot" class="text-blue-400 hover:text-blue-600">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.54 7.54l-2.1 7.88c-.15.56-.62.73-1.17.39l-2.54-1.86-1.22 1.17c-.13.13-.26.17-.39.17l.17-3.56 5.61-5.07c.22-.2.1-.56-.27-.37l-6.93 4.37-2.54-.78c-.56-.17-.73-.73-.34-1.17l9.83-5.66c.46-.27 1.02.02 1.1.56z"/></svg>
+        </a>
+        <a href="mailto:support@tpticketspartner.com" class="text-blue-400 hover:text-blue-600">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
     </div>
   </footer>
 
@@ -152,7 +273,7 @@
   <script>
     // GSAP Animations
     gsap.from(".animate-fade-in", { opacity: 0, y: 20, duration: 1, stagger: 0.2 });
-    gsap.from(".animate-slide-up", { opacity: 0, y: 50, duration: 1, stagger: 0.2 });
+    gsap.from(".animate-slide-up", { opacity: 0, y: 50, duration: 1, stagger: 0.2, scrollTrigger: { trigger: ".animate-slide-up", start: "top 80%" } });
 
     // Scroll to Top
     window.addEventListener("scroll", () => {
@@ -161,26 +282,54 @@
       else btn.classList.remove("visible");
     });
 
-    // Three.js 3D Logo
+    // Swiper Slider
+    new Swiper(".reviews-slider", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: { delay: 5000 },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+
+    // Three.js Planet
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth > 768 ? 400 : 300, 300);
-    document.getElementById("logo-3d").appendChild(renderer.domElement);
+    document.getElementById("planet-3d").appendChild(renderer.domElement);
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x2563eb });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-    camera.position.z = 5;
+    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const material = new THREE.MeshBasicMaterial({ color: 0x2563eb, wireframe: true });
+    const planet = new THREE.Mesh(geometry, material);
+    scene.add(planet);
+    camera.position.z = 3;
+
+    // Arrows
+    const arrowMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+    const points = [
+      new THREE.Vector3(1.5, 0, 0), new THREE.Vector3(2, 0.5, 0), new THREE.Vector3(2.5, 0, 0)
+    ];
+    const arrowGeometry = new THREE.BufferGeometry().setFromPoints(points);
+    const arrow = new THREE.Line(arrowGeometry, arrowMaterial);
+    scene.add(arrow);
 
     function animate() {
       requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+      planet.rotation.y += 0.005;
+      arrow.rotation.y += 0.01;
       renderer.render(scene, camera);
     }
     animate();
+
+    // Parallax Mouse Effect
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 0.1;
+      const y = (e.clientY / window.innerHeight - 0.5) * 0.1;
+      planet.rotation.y += x * 0.05;
+      planet.rotation.x += y * 0.05;
+    });
   </script>
 </body>
 </html>
