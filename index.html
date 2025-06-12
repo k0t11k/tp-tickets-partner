@@ -61,11 +61,15 @@
     .dark .hover\:bg-blue-700:hover { background: #6A9113; }
     .dark .text-blue-400 { color: #8ABF1F; }
     .text-shadow { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .theme-toggle {
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 <body>
   <!-- Theme Toggle -->
-  <button class="fixed top-4 right-4 z-50 p-2 rounded-full bg-gray-200 dark:bg-gray-700" @click="darkMode = !darkMode">
+  <button class="theme-toggle fixed top-4 right-4 p-3 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200" @click="darkMode = !darkMode">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
   </button>
 
@@ -88,56 +92,60 @@
   <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
     <div class="container mx-auto px-4 max-w-7xl text-center">
       <div id="planet-3d" class="h-80 mx-auto mb-8"></div>
-      <h1 class="text-5xl md:text-6xl font-bold mb-4 text-gray-900 dark:text-white text-shadow animate-fade-in">TP Tickets Partner</h1>
-      <p class="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200 text-shadow animate-fade-in delay-200">Автоматизуйте продаж квитків, реєстрацію та нагадування через Telegram</p>
-      <a href="https://t.me/TPTicketsBot" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition animate-fade-in delay-400 z-10 relative">Спробувати безкоштовно</a>
+      <div id="planet-fallback" class="hidden h-80 mx-auto mb-8">
+        <svg class="w-full h-full" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#8ABF1F" stroke-width="2"/>
+          <path d="M60 50L70 55L80 50" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+          <path d="M40 60L30 65L20 60" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+          <path d="M50 40L50 70L40 80" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+        </svg>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white text-shadow">TP Tickets</h1>
+      <p class="text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-200">Автоматизація подій через Telegram</p>
+      <a href="https://t.me/TPTicketsBot" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Спробувати безкоштовно</a>
     </div>
   </section>
 
   <!-- Advantages Section -->
   <section id="advantages" class="py-20 bg-white dark:bg-gray-900">
     <div class="container mx-auto px-4 max-w-7xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white animate-slide-up">Чому TP Tickets Partner?</h2>
-      <p class="text-xl text-center mb-12 text-gray-700 dark:text-gray-200 animate-slide-up delay-200">Ваш ідеальний партнер для організації подій у два кліки</p>
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white">Чому TP Tickets Partner?</h2>
+      <p class="text-xl text-center mb-12 text-gray-600 dark:text-gray-400">Ваш партнер для швидкої організації подій</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-400">
-          <h3 class="text-2xl font-semibold mb-6 text-blue-600 dark:text-green-500">TP Tickets Partner</h3>
+        <div class="p-8 rounded-lg frosted-glass">
+          <h3 class="text-xl font-semibold mb-6 text-blue-600 dark:text-green-500">TP Tickets Partner</h3>
           <ul class="space-y-4">
             <li class="flex items-center">
-              <svg class="w-6 h-6 mr-3 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
+              <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
               85% залученості через Telegram
             </li>
             <li class="flex items-center">
-              <svg class="w-6 h-6 mr-3 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
+              <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
               Щоденні виплати на ваш рахунок
             </li>
             <li class="flex items-center">
-              <svg class="w-6 h-6 mr-3 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
+              <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
               Запуск події за 5 хвилин
             </li>
           </ul>
         </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-600">
-          <h3 class="text-2xl font-semibold mb-6 text-gray-600 dark:text-gray-400">Інші сервіси</h3>
+        <div class="p-8 rounded-lg frosted-glass">
+          <h3 class="text-xl font-semibold mb-6 text-blue-600 dark:text-blue-400">Інші сервіси</h3>
           <ul class="space-y-4">
             <li class="flex items-center">
-              <svg class="w-6 h-6 mr-3 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6l12 12m0-12L6 12" /></svg>
-              Гості ігнорують імейли
+              <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+              Складна інтеграція з платіжними системами
             </li>
             <li class="flex items-center">
-              <svg class="w-6 h-6 mr-3 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6l12 12m0-12L6 12" /></svg>
-              Повільні або незрозумілі виплати
+              <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+              Відсутність автоматизації нагадувань
             </li>
             <li class="flex items-center">
-              <svg class="w-6 h-6 mr-3 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6l12 12m0-12L6 12" /></svg>
-              Потрібно 3–5 сервісів
+              <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+              Обмежена аналітика продажів
             </li>
           </ul>
         </div>
-      </div>
-      <div class="text-center mt-12 animate-slide-up delay-800">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">750+ подій проведено</p>
-        <p class="text-xl text-gray-700 dark:text-gray-200">10k+ учасників, 4x вища залученість</p>
       </div>
     </div>
   </section>
@@ -145,37 +153,31 @@
   <!-- Features Section -->
   <section id="features" class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-4 max-w-7xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white animate-slide-up">Можливості</h2>
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white">Можливості</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-200">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Стильна сторінка події</h3>
-          <p class="text-gray-700 dark:text-gray-200">Автоматично створена сторінка, оптимізована для всіх пристроїв.</p>
+        <div class="space-y-12">
+          <div class="p-8 rounded-lg frosted-glass">
+            <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Реєстрація через Telegram</h3>
+            <p class="text-gray-600 dark:text-gray-400">Проста реєстрація через чат-бот без форм.</p>
+          </div>
+          <div class="p-8 rounded-lg frosted-glass">
+            <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V9h8v2zm0-4H8V5h8v2z" /></svg>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Продаж квитків</h3>
+            <p class="text-gray-600 dark:text-gray-400">Онлайн-продаж з підтримкою промокодів і знижок.</p>
+          </div>
         </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-400">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V9h8v2zm0-4H8V5h8v2z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Продаж квитків</h3>
-          <p class="text-gray-700 dark:text-gray-200">Онлайн-продаж з підтримкою промокодів і знижок.</p>
-        </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-600">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Реєстрація через Telegram</h3>
-          <p class="text-gray-700 dark:text-gray-200">Проста реєстрація через чат-бот без форм.</p>
-        </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-800">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">QR-сканування</h3>
-          <p class="text-gray-700 dark:text-gray-200">Скануйте квитки з телефону без обладнання.</p>
-        </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-1000">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 14v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Авто-нагадування</h3>
-          <p class="text-gray-700 dark:text-gray-200">Автоматичні нагадування для гостей.</p>
-        </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-1200">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Збір фідбеку</h3>
-          <p class="text-gray-700 dark:text-gray-200">Форма фідбеку з 47% відповідей.</p>
+        <div class="space-y-12">
+          <div class="p-8 rounded-lg frosted-glass">
+            <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" /></svg>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">QR-сканування</h3>
+            <p class="text-gray-600 dark:text-gray-400">Скануйте квитки з телефону без обладнання.</p>
+          </div>
+          <div class="p-8 rounded-lg frosted-glass">
+            <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" /></svg>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Збір фідбеку</h3>
+            <p class="text-gray-600 dark:text-gray-400">Форма фідбеку з 47% відповідей.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -184,27 +186,19 @@
   <!-- Pricing Section -->
   <section id="pricing" class="py-20 bg-white dark:bg-gray-900">
     <div class="container mx-auto px-4 max-w-7xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white animate-slide-up">Прозоре ціноутворення</h2>
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white">Прозоре ціноутворення</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-200 hover:shadow-xl transition">
+        <div class="p-8 rounded-lg frosted-glass hover:shadow-xl transition">
           <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Free</h3>
           <p class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">$0 / місяць</p>
-          <ul class="list-disc pl-6 mb-6 text-gray-700 dark:text-gray-200">
-            <li>Реєстрація учасників</li>
-            <li>Чекіни та QR-сканування</li>
-            <li>Збір фідбеку</li>
-          </ul>
-          <a href="https://t.me/TPTicketsBot" class="block bg-blue-600 text-white px-6 py-3 rounded-full text-center font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Почати</a>
+          <p class="text-gray-600 dark:text-gray-400 mb-6">Для безкоштовних та благодійних подій з базовими функціями</p>
+          <a href="https://t.me/TPTicketsBot" class="block bg-blue-600 text-white px-6 py-3 rounded-lg text-center font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Почати</a>
         </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-400 hover:shadow-xl transition">
+        <div class="p-8 rounded-lg frosted-glass hover:shadow-xl transition">
           <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Pro</h3>
-          <p class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">6% / квиток</p>
-          <ul class="list-disc pl-6 mb-6 text-gray-700 dark:text-gray-200">
-            <li>Повний функціонал</li>
-            <li>Оплати та виплати</li>
-            <li>Керування командою</li>
-          </ul>
-          <a href="https://t.me/TPTicketsBot" class="block bg-blue-600 text-white px-6 py-3 rounded-full text-center font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Почати</a>
+          <p class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">6% / з кожного квитка</p>
+          <p class="text-gray-600 dark:text-gray-400 mb-6">Повний функціонал для комерційних подій</p>
+          <a href="https://t.me/TPTicketsBot" class="block bg-blue-600 text-white px-6 py-3 rounded-lg text-center font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Почати</a>
         </div>
       </div>
     </div>
@@ -213,23 +207,23 @@
   <!-- Reviews Section (Slider) -->
   <section id="reviews" class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-4 max-w-7xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white animate-slide-up">Що кажуть організатори</h2>
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white">Що кажуть організатори</h2>
       <div class="swiper reviews-slider max-w-3xl mx-auto">
         <div class="swiper-wrapper">
           <div class="swiper-slide p-8 rounded-lg frosted-glass text-center">
-            <p class="italic text-gray-700 dark:text-gray-200">"Зекономила години рутини завдяки TP Tickets Partner!"</p>
+            <p class="italic text-gray-600 dark:text-gray-400">"Зекономила години рутини завдяки TP Tickets Partner!"</p>
             <p class="mt-4 font-semibold text-gray-900 dark:text-white">Емілія, організатор мітапів</p>
           </div>
           <div class="swiper-slide p-8 rounded-lg frosted-glass text-center">
-            <p class="italic text-gray-700 dark:text-gray-200">"Гості люблять квитки в Telegram."</p>
+            <p class="italic text-gray-600 dark:text-gray-400">"Гості люблять квитки в Telegram."</p>
             <p class="mt-4 font-semibold text-gray-900 dark:text-white">Андрій, Marketing Coffee</p>
           </div>
           <div class="swiper-slide p-8 rounded-lg frosted-glass text-center">
-            <p class="italic text-gray-700 dark:text-gray-200">"Реєстрація стала втричі швидшою!"</p>
+            <p class="italic text-gray-600 dark:text-gray-400">"Реєстрація стала втричі швидшою!"</p>
             <p class="mt-4 font-semibold text-gray-900 dark:text-white">Данило, воркшопи</p>
           </div>
           <div class="swiper-slide p-8 rounded-lg frosted-glass text-center">
-            <p class="italic text-gray-700 dark:text-gray-200">"100 гостей на мітапах Wtech — усе ідеально!"</p>
+            <p class="italic text-gray-600 dark:text-gray-400">"100 гостей на мітапах Wtech — усе ідеально!"</p>
             <p class="mt-4 font-semibold text-gray-900 dark:text-white">Аліна, Wtech</p>
           </div>
         </div>
@@ -243,184 +237,230 @@
   <!-- How to Start Section -->
   <section id="how-to-start" class="py-20 bg-white dark:bg-gray-900">
     <div class="container mx-auto px-4 max-w-7xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white animate-slide-up">Як почати</h2>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-200">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white">Як почати</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 max-w-6xl mx-auto">
+        <div class="p-8 rounded-lg frosted-glass">
           <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
           <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Завантажте бот</h3>
-          <p class="text-gray-700 dark:text-gray-200">Створіть акаунт у Telegram-боті.</p>
+          <p class="text-gray-600 dark:text-gray-400">Створіть акаунт у Telegram-боті.</p>
         </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-400">
+        <div class="p-8 rounded-lg frosted-glass">
           <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" /></svg>
           <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Створіть подію</h3>
-          <p class="text-gray-700 dark:text-gray-200">Додайте деталі та квитки.</p>
+          <p class="text-gray-600 dark:text-gray-400">Додайте деталі та квитки.</p>
         </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-600">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Поширте посилання</h3>
-          <p class="text-gray-700 dark:text-gray-200">Поділіться в соцмережах.</p>
-        </div>
-        <div class="p-8 rounded-lg frosted-glass animate-slide-up delay-800">
-          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 14v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg>
-          <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Керуйте подією</h3>
-          <p class="text-gray-700 dark:text-gray-200">Стежте за оплатами в реальному часі.</p>
+        <div class="p-8 rounded-lg frosted-glass">
+          <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.70l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.70L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.61.92 0 2.61-.31 0-2.61-.92 z" /></svg>
+      <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Поширте посилання</h3>
+      <p class="text-gray-600 dark:text-gray-400">Поділіться у соцмережах.</p>
+    </div>
+    <div class="p-8 rounded-lg frosted-glass">
+      <svg class="w-10 h-10 mb-4 text-blue-600 dark:text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 14v1c0 1.1.9 2 2 2v1.93zm0-2v1.91c3-1.95.49-5-3.85-5-7.93-.31 0 2.24-5 5-5 5-2.24-5-5 2.24-5 5 5 5-2.24-5 5z"/>
+      <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Керуйте подією</h3>
+      <p class="text-gray-600 dark:text-gray-400">Стежте за оплатами в реальному часі.</p>
+    </div>
+  </div>
+  <div class="text-center mt-12">
+    <a href="https://t.me/TPTicketsBot" target="_blank" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Почати зараз</a>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-20 bg-gray-50 dark:bg-gray-800">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white">Поширені запитання</h2>
+    <div x-data="{ open: null }" class="space-y-4">
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 1 ? null : 1">
+          Як швидко запустити подію?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 1 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 1" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          За 5 хвилин через Telegram-бот, без технічних знань.
         </div>
       </div>
-      <div class="text-center mt-12">
-        <a href="https://t.me/TPTicketsBot" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Почати зараз</a>
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 2 ? null : 2">
+          Чи можу я затверджувати учасників?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 2 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9 l-7 7 l-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 2" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          Так, ви можете перевіряти заявки перед видачею квитків.
+        </div>
+      </div>
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 3 ? null : 3">
+          Як продавати квитки через Telegram?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9 l-7 7 l-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 3" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          Бот автоматично обробляє оплати та надсилає квитки.
+        </div>
+      </div>
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 4 ? null : 4">
+          Чи потрібен сайт?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 4 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 4" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          Ні, усе працює через Telegram та сторінку події.
+        </div>
+      </div>
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 5 ? null : 5">
+          Чи потрібно гостям щось встановлювати?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 5 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 5" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          Ні, усе працює в Telegram.
+        </div>
+      </div>
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 6 ? null : 6">
+          Як працюють виплати?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 6 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 6" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          Щоденні виплати на ваш рахунок, прозора аналітика.
+        </div>
+      </div>
+      <div class="p-6 rounded-lg frosted-glass">
+        <h3 class="text-xl font-semibold mb-1 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 7 ? null : 7">
+          Що робити, якщо виникнуть проблеми?
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transition" :class="{ 'rotate-180': open === 7 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </h3>
+        <div x-show="open === 7" x-transition class="pt-2 text-gray-600 dark:text-gray-400">
+          Зверніться до підтримки через Telegram, відповідь за 10 хвилин.
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FAQ Section -->
-  <section id="faq" class="py-20 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 max-w-3xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white animate-slide-up">Поширені запитання</h2>
-      <div x-data="{ open: null }" class="space-y-6">
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-200">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 1 ? null : 1">
-            Як швидко запустити подію?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 1 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 1" x-transition class="text-gray-700 dark:text-gray-200">За 5 хвилин через Telegram-бот, без технічних знань.</p>
-        </div>
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-400">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 2 ? null : 2">
-            Чи можу я затверджувати учасників?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 2 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 2" x-transition class="text-gray-700 dark:text-gray-200">Так, ви можете перевіряти заявки перед видачею квитків.</p>
-        </div>
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-600">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 3 ? null : 3">
-            Як продавати квитки через Telegram?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 3" x-transition class="text-gray-700 dark:text-gray-200">Бот автоматично обробляє оплати та надсилає квитки.</p>
-        </div>
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-800">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 4 ? null : 4">
-            Чи потрібен сайт?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 4 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 4" x-transition class="text-gray-700 dark:text-gray-200">Ні, усе працює через Telegram та сторінку події.</p>
-        </div>
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1000">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 5 ? null : 5">
-            Як працюють виплати?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 5 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 5" x-transition class="text-gray-700 dark:text-gray-200">Щоденні виплати на ваш рахунок, прозора аналітика.</p>
-        </div>
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1200">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 6 ? null : 6">
-            Чи потрібно гостям щось встановлювати?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 6 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 6" x-transition class="text-gray-700 dark:text-gray-200">Ні, усе працює в Telegram.</p>
-        </div>
-        <div class="p-6 rounded-lg frosted-glass animate-slide-up delay-1400">
-          <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-gray-900 dark:text-white" @click="open = open === 7 ? null : 7">
-            Що робити, якщо виникнуть проблеми?
-            <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': open === 7 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </h3>
-          <p x-show="open === 7" x-transition class="text-gray-700 dark:text-gray-200">Зверніться до підтримки через Telegram, відповідь за 10 хвилин.</p>
-        </div>
-      </div>
+<!-- Footer -->
+<footer class="py-12 bg-gray-800 dark:bg-gray-900 text-white">
+  <div class="container mx-auto px-4 max-w-7xl text-center">
+    <p class="text-lg">TP Tickets Partner, Київ, Україна, 2025</p>
+    <div class="mt-6 flex justify-center space-x-6">
+      <a href="https://t.me/TPTicketsBot" target="_blank" class="text-blue-400 dark:text-green-400 hover:text-blue-600 dark:hover:text-green-600">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.54 7.54l-2.1 7.88c-.15.56-.62.73-1.17.39l-2.54-1.86l-1.22 1.17c-.13.13-.26.17-.39.17l.17-3.56 5.61-5.07c.22-.2.1-.56-.27-.37l-6.93 4.37l-2.54-.78c-.56-.17-.73-.73-.34-1.17l9.83-5.66c.46-.27 1.02.02 1.1.56z"/></svg>
+      </a>
+      <a href="mailto:support@tpticketspartner.com" class="text-blue-400 dark:text-green-400 hover:text-blue-600 dark:hover:text-green-600">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- Footer -->
-  <footer class="py-12 bg-gray-800 dark:bg-gray-900 text-white">
-    <div class="container mx-auto px-4 max-w-7xl text-center">
-      <p class="text-lg">TP Tickets Partner, Київ, Україна, 2025</p>
-      <div class="mt-6 flex justify-center space-x-6">
-        <a href="https://t.me/TPTicketsBot" class="text-blue-400 dark:text-green-400 hover:text-blue-600 dark:hover:text-green-600">
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.54 7.54l-2.1 7.88c-.15.56-.62.73-1.17.39l-2.54-1.86-1.22 1.17c-.13.13-.26.17-.39.17l.17-3.56 5.61-5.07c.22-.2.1-.56-.27-.37l-6.93 4.37-2.54-.78c-.56-.17-.73-.73-.34-1.17l9.83-5.66c.46-.27 1.02.02 1.1.56z"/></svg>
-        </a>
-        <a href="mailto:support@tpticketspartner.com" class="text-blue-400 dark:text-green-400 hover:text-blue-600 dark:hover:text-green-600">
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
-      </div>
-    </div>
-  </footer>
+<!-- Mobile CTA -->
+<a href="https://t.me/TPTicketsBot" target="_blank" class="mobileCTA bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Спробувати</a>
 
-  <!-- Mobile CTA -->
-  <a href="https://t.me/TPTicketsBot" class="mobile-cta bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 dark:bg-green-500 dark:hover:bg-green-600 transition">Спробувати</a>
+<!-- Scroll to Top Button -->
+<button id="scrollToTop" class="fixed bottom-20 right-4 bg-blue-600 dark:bg-green-500 text-white p-4 rounded-lg hover:bg-blue-700 dark:hover:bg-green-600 transition opacity-0">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+</button>
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top bg-blue-600 text-white p-4 rounded-full dark:bg-green-500">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-  </button>
+<script>
+// GSAP Animations
+gsap.from(".animate-hero", { opacity: 0, y: 30, duration: 1, stagger: 0.2 });
+gsap.from(".animate-scroll", { opacity: 0, y: 50, duration: 1, stagger: 0.2, scrollTrigger: ".animate-scroll" });
 
-  <script>
-    // GSAP Animations
-    gsap.from(".animate-fade-in", { opacity: 0, y: 30, duration: 1, stagger: 0.2 });
-    gsap.from(".animate-slide-up", { opacity: 0, y: 50, duration: 1, stagger: 0.2, scrollTrigger: { trigger: ".animate-slide-up", start: "top 85%" } });
+// Scroll to Top
+window.addEventListener('scroll', () => {
+  const btn = document.querySelector('#scrollToTop');
+  btn.style.opacity = window.scrollY > 300 ? '1' : '0';
+});
 
-    // Scroll to Top
-    window.addEventListener("scroll", () => {
-      const btn = document.querySelector(".scroll-to-top");
-      if (window.scrollY > 300) btn.classList.add("visible");
-      else btn.classList.remove("visible");
+// Swiper Slider
+new Swiper('.swiper-container', {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  autoplay: { delay: 5000 },
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
+  pagination: { el: '.swiper-pagination', clickable: true },
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+});
+
+// Three.js 3D Planet
+const container = document.getElementById('planet-3d');
+const fallback = document.getElementById('planet-fallback');
+let scene, camera, renderer, planet;
+
+function initThreeJS() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  renderer = new THREE.WebGLRenderer({ alpha: true });
+  
+  const size = window.innerWidth <= 768 ? 300 : 400;
+  renderer.setSize(size, size);
+  container.appendChild(renderer.domElement);
+
+  const geometry = new THREE.SphereGeometry(1.5, 16, 16);
+  const material = new THREE.MeshBasicMaterial({ color: 0x8ABF1F, wireframe: true });
+  planet = new THREE.Mesh(geometry, material);
+  scene.add(planet);
+
+  const arrowMaterial = new THREE.LineBasicMaterial({ color: 0xFFFFFF });
+  const arrows = [
+    { points: [new THREE.Vector3(1.8, 0, 0), new THREE.Vector3(2.3, 0.5, 0), new THREE.Vector3(2.8, 0, 0)] }, // Kyiv
+    { points: [new THREE.Vector3(-1.8, 0.5, 0), new THREE.Vector3(-2.3, 1, 0), new THREE.Vector3(-2.8, 0.5, 0)] }, // Warszawa
+    { points: [new THREE.Vector3(0, -1.8, 0), new THREE.Vector3(0, -2.3, 0.5), new THREE.Vector3(0, -2.8, 0)] } // Berlin
+  ];
+  arrows.forEach(arrow => {
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(arrow.points), arrowMaterial);
+    scene.add(line);
+  });
+
+  camera.position.z = 4;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    planet.rotation.y += 0.003;
+    arrows.forEach((_, i) => {
+      const line = scene.children[i + 1];
+      line.scale.set(1 + 0.1 * Math.sin(Date.now() * 0.003 + i), 1, 1);
     });
+    renderer.render(scene, camera);
+  }
+  animate();
 
-    // Swiper Slider
-    new Swiper(".reviews-slider", {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
-      autoplay: { delay: 5000 },
-      effect: "fade",
-      fadeEffect: { crossFade: true },
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: { nextEl: ".swiper-button-prev", prevEl: ".swiper-button-next" }
-    });
+  // Mouse Parallax
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 0.1;
+    const y = (e.clientY / window.innerHeight - 0.5) * 0.1;
+    planet.rotation.y += x * 0.03;
+    planet.rotation.x += y * 0.03;
+  });
+}
 
-    // Three.js Planet
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth > 768 ? 400 : 300, 400);
-    document.getElementById("planet-3d").appendChild(renderer.domElement);
+// Check WebGL Support
+function hasWebGL() {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+  } catch (e) {
+    return false;
+  }
+}
 
-    const geometry = new THREE.SphereGeometry(1.5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x8ABF1F, wireframe: true });
-    const planet = new THREE.Mesh(geometry, material);
-    scene.add(planet);
-    camera.position.z = 4;
+if (hasWebGL()) {
+  initThreeJS();
+} else {
+  container.classList.add('hidden');
+  fallback.classList.remove('hidden');
+}
 
-    // Arrows for Kyiv, Warsaw, Berlin
-    const arrowMaterial = new THREE.LineBasicMaterial({ color: 0xFFFFFF });
-    const arrows = [
-      { points: [new THREE.Vector3(1.8, 0, 0), new THREE.Vector3(2.3, 0.5, 0), new THREE.Vector3(2.8, 0, 0)], label: "Київ" },
-      { points: [new THREE.Vector3(-1.8, 0.5, 0), new THREE.Vector3(-2.3, 1, 0), new THREE.Vector3(-2.8, 0.5, 0)], label: "Варшава" },
-      { points: [new THREE.Vector3(0, -1.8, 0), new THREE.Vector3(0, -2.3, 0.5), new THREE.Vector3(0, -2.8, 0)], label: "Берлін" }
-    ];
-    arrows.forEach(arrow => {
-      const arrowGeometry = new THREE.BufferGeometry().setFromPoints(arrow.points);
-      const line = new THREE.Line(arrowGeometry, arrowMaterial);
-      scene.add(line);
-    });
-
-    function animate() {
-      requestAnimationFrame(animate);
-      planet.rotation.y += 0.003;
-      arrows.forEach((_, i) => {
-        const line = scene.children[i + 1];
-        line.scale.set(1 + 0.1 * Math.sin(Date.now() * 0.002 + i), 1, 1);
-      });
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Parallax Mouse Effect
-    document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 0.1;
-      const y = (e.clientY / window.innerHeight - 0.5) * 0.1;
-      planet.rotation.y += x * 0.03;
-      planet.rotation.x += y * 0.03;
-    });
-  </script>
+// Resize Handler
+window.addEventListener('resize', () => {
+  const size = window.innerWidth <= 768 ? 300 : 400;
+  if (renderer) {
+    renderer.setSize(size, size);
+    camera.aspect = 1;
+    camera.updateProjectionMatrix();
+  }
+});
+</script>
 </body>
 </html>
