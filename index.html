@@ -115,7 +115,19 @@
       0%, 100% { opacity: 0.7; }
       50% { opacity: 1; }
     }
-    /* Адаптивність */
+    .city-label {
+      position: absolute;
+      color: #F5F7FA;
+      background: rgba(0, 255, 133, 0.3);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .arrow:hover .city-label {
+      opacity: 1;
+    }
     @media (max-width: 480px) {
       :root { --blur: 6px; }
       .text-8xl { font-size: 2.5rem; }
@@ -130,6 +142,7 @@
       .nav-links { display: none; }
       .burger-menu { display: block; }
       .swiper-slide { padding: 1rem !important; }
+      .city-label { opacity: 1; font-size: 0.625rem; }
     }
     @media (max-width: 768px) {
       :root { --blur: 8px; }
@@ -139,6 +152,7 @@
       .py-24 { padding-top: 4rem; padding-bottom: 4rem; }
       .gap-12 { gap: 1.5rem; }
       .planet-container { height: 240px; }
+      .city-label { font-size: 0.75rem; }
     }
     @media (max-width: 1024px) {
       .text-8xl { font-size: 4rem; }
@@ -158,7 +172,7 @@
     }
   </style>
 </head>
-<body x-data="{ menuOpen: false }">
+<body x-data="{ menuOpen: false, formSubmitted: false }">
   <!-- Header -->
   <header class="sticky-nav frosted-glass py-6" role="navigation" aria-label="Main navigation">
     <div class="container mx-auto px-6 max-w-9xl flex justify-between items-center">
@@ -194,7 +208,7 @@
   <section class="min-h-screen flex items-center justify-center relative overflow-hidden" role="banner">
     <div class="stars-bg"></div>
     <div class="container mx-auto px-6 max-w-9xl flex flex-col lg:flex-row items-center gap-12">
-      <div class="planet-container lg:w-2/5">
+      <div class="planet-container lg:w-2/5 relative">
         <div id="three-3d" class="h-[180px] sm:h-[240px] md:h-[320px] lg:h-[400px] mx-auto"></div>
         <div id="three-fallback" class="hidden h-[180px] sm:h-[240px] md:h-[320px] lg:h-[400px] mx-auto">
           <svg class="w-full h-full" viewBox="0 0 100 100">
@@ -202,6 +216,9 @@
             <path d="M50 45L55 50L50 55" fill="none" stroke="#F5F7FA" stroke-width="2" class="animate-glow"/>
             <path d="M45 50L40 55L35 50" fill="none" stroke="#F5F7FA" stroke-width="2" class="animate-glow delay-100"/>
             <path d="M55 40L60 45L65 40" fill="none" stroke="#F5F7FA" stroke-width="2" class="animate-glow delay-200"/>
+            <text x="50" y="30" fill="#F5F7FA" font-size="6" text-anchor="middle">Київ</text>
+            <text x="40" y="40" fill="#F5F7FA" font-size="6" text-anchor="middle">Львів</text>
+            <text x="60" y="50" fill="#F5F7FA" font-size="6" text-anchor="middle">Варшава</text>
           </svg>
         </div>
       </div>
@@ -338,11 +355,12 @@
         </div>
         <div class="p-8 rounded-3xl frosted-glass animate-fade delay-600">
           <h3 class="text-3xl font-semibold mb-6 text-white">Зареєструйся</h3>
-          <form action="https://t.me/TPTicketsBot" method="POST" class="space-y-4">
-            <input type="text" placeholder="Ваше ім'я" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
-            <input type="email" placeholder="Ваш email" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
-            <input type="text" placeholder="Ваш Telegram" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
+          <form action="https://t.me/TPTicketsBot" method="POST" class="space-y-4" @submit="formSubmitted = true">
+            <input type="text" name="name" placeholder="Ваше ім'я" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
+            <input type="email" name="email" placeholder="Ваш email" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
+            <input type="text" name="telegram" placeholder="Ваш Telegram" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
             <button type="submit" class="btn-cta w-full text-black px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors">Стати партнером</button>
+            <p x-show="formSubmitted" class="text-green-400 text-center mt-4" x-transition>Реєстрація успішна!</p>
           </form>
         </div>
       </div>
@@ -356,21 +374,29 @@
       <p class="text-lg text-center font-medium mb-12 text-gray-300 animate-fade delay-200">Думки тих, хто вже з нами</p>
       <div class="swiper reviews-slider">
         <div class="swiper-wrapper">
-          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-400">
-            <p class="italic text-lg text-gray-300">"Зекономила години рутини!"</p>
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-400 shadow-lg">
+            <p class="italic text-xl text-gray-300">"Зекономила години рутини!"</p>
             <p class="mt-6 font-semibold text-white">Емілія, організатор мітапів</p>
           </div>
-          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-600">
-            <p class="italic text-lg text-gray-300">"Гості люблять квитки в Telegram."</p>
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-600 shadow-lg">
+            <p class="italic text-xl text-gray-300">"Гості люблять квитки в Telegram."</p>
             <p class="mt-6 font-semibold text-white">Андрій, Marketing Coffee</p>
           </div>
-          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-800">
-            <p class="italic text-lg text-gray-300">"Реєстрація стала швидшою!"</p>
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-800 shadow-lg">
+            <p class="italic text-xl text-gray-300">"Реєстрація стала швидшою!"</p>
             <p class="mt-6 font-semibold text-white">Данило, воркшопи</p>
           </div>
-          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-1000">
-            <p class="italic text-lg text-gray-300">"100 гостей — ідеально!"</p>
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-1000 shadow-lg">
+            <p class="italic text-xl text-gray-300">"100 гостей — ідеально!"</p>
             <p class="mt-6 font-semibold text-white">Аліна, Wtech</p>
+          </div>
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-1200 shadow-lg">
+            <p class="italic text-xl text-gray-300">"Аналітика продажів — топ!"</p>
+            <p class="mt-6 font-semibold text-white">Олена, організатор конференцій</p>
+          </div>
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-1400 shadow-lg">
+            <p class="italic text-xl text-gray-300">"QR-сканування спростило вхід."</p>
+            <p class="mt-6 font-semibold text-white">Максим, організатор фестивалів</p>
           </div>
         </div>
         <div class="swiper-pagination mt-12"></div>
@@ -395,7 +421,7 @@
           <p class="text-base text-gray-300">Додайте деталі та квитки.</p>
         </div>
         <div class="p-6 rounded-3xl frosted-glass animate-fade delay-800">
-          <svg class="w-12 h-12 mb-4 text-green-400 icon-anim" fill="currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.70L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
+          <svg class="w-12 h-12 mb-4 text-green-400 icon-anim" fill="currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.70s-.04-.47-.09-.70l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.70L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
           <h3 class="text-2xl font-semibold mb-4 text-white">Поширте посилання</h3>
           <p class="text-base text-gray-300">Поділіться в соцмережах.</p>
         </div>
@@ -430,8 +456,6 @@
         </div>
         <div class="p-8 rounded-3xl frosted-glass animate-fade delay-800">
           <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-white" @click="open = open === 3 ? null : 3" aria-expanded="false" :aria-expanded="open === 3">
-            Як продавати квитки через Telegram?
-            <svg class="w-6 h-6 text-gray-300 transition-transform" :class="{ 'rotate-180': open === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24  intimately" :aria-expanded="open === 3">
             Як продавати квитки через Telegram?
             <svg class="w-6 h-6 text-gray-300 transition-transform" :class="{ 'rotate-180': open === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </h3>
@@ -519,8 +543,6 @@
       spaceBetween: 24,
       loop: true,
       autoplay: { delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true },
-      effect: "coverflow",
-      coverflowEffect: { rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false },
       pagination: { el: ".swiper-pagination", clickable: true },
       touchRatio: 1.5,
       breakpoints: {
@@ -565,21 +587,44 @@
       const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.8);
       scene.add(ambientLight);
 
-      // Arrows
+      // Arrows with Labels
       const arrowGeometry = new THREE.ConeGeometry(0.06, 0.25, 32);
       const arrowMaterial = new THREE.MeshStandardMaterial({ color: 0xFF4D4F, emissive: 0xFF4D4F, emissiveIntensity: 0.8 });
       const arrowPositions = [
-        { pos: [0.9, 0.3, 1.5], label: "Kyiv" },
-        { pos: [-0.6, 0.5, 1.5], label: "Warsaw" },
-        { pos: [-0.9, 0.1, 1.5], label: "Berlin" }
+        { pos: [0.9, 0.3, 1.5], label: "Київ", labelPos: [10, -10] },
+        { pos: [-0.6, 0.5, 1.5], label: "Варшава", labelPos: [-20, 10] },
+        { pos: [-0.9, 0.1, 1.5], label: "Берлін", labelPos: [-30, 0] },
+        { pos: [0.7, -0.2, 1.5], label: "Львів", labelPos: [15, -15] }
       ];
 
-      arrowPositions.forEach(({ pos }) => {
+      arrowPositions.forEach(({ pos, label, labelPos }, index) => {
+        const arrowGroup = new THREE.Group();
+        arrowGroup.name = `arrow-${index}`;
         const arrow = new THREE.Mesh(arrowGeometry, arrowMaterial);
         arrow.position.set(...pos);
         arrow.lookAt(0, 0, 0);
-        scene.add(arrow);
-        arrows.push(arrow);
+        arrowGroup.add(arrow);
+        scene.add(arrowGroup);
+        arrows.push(arrowGroup);
+
+        // Create label in DOM
+        const labelDiv = document.createElement("div");
+        labelDiv.className = "city-label";
+        labelDiv.textContent = label;
+        labelDiv.style.position = "absolute";
+        container.appendChild(labelDiv);
+
+        // Position label in 2D
+        function updateLabelPosition() {
+          const vector = new THREE.Vector3(...pos).project(camera);
+          const x = (vector.x * 0.5 + 0.5) * container.clientWidth;
+          const y = (-vector.y * 0.5 + 0.5) * container.clientHeight;
+          labelDiv.style.left = `${x + labelPos[0]}px`;
+          labelDiv.style.top = `${y + labelPos[1]}px`;
+        }
+        updateLabelPosition();
+        window.addEventListener("resize", updateLabelPosition);
+        arrowGroup.userData.updateLabel = updateLabelPosition;
       });
 
       camera.position.z = 3.5;
@@ -589,10 +634,18 @@
         if (!container.isConnected) return;
         requestAnimationFrame(animate);
         time += 0.02;
-        planet.rotation.y += 0.001;
+        planet.rotation.y += 0.0005;
         planet.rotation.x += 0.0002 * Math.sin(time);
         arrows.forEach((arrow, i) => {
-          gsap.to(arrow.scale, { x: 0.8 + 0.3 * Math.sin(time + i), y: 0.8 + 0.3 * Math.sin(time + i), z: 0.8 + 0.3 * Math.sin(time + i), duration: 0.8, yoyo: true, repeat: -1 });
+          gsap.to(arrow.scale, {
+            x: 0.8 + 0.3 * Math.sin(time + i),
+            y: 0.8 + 0.3 * Math.sin(time + i),
+            z: 0.8 + 0.3 * Math.sin(time + i),
+            duration: 0.8,
+            yoyo: true,
+            repeat: -1
+          });
+          arrow.userData.updateLabel?.();
         });
         renderer.render(scene, camera);
       }
