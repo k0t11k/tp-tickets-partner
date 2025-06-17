@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="TP Tickets Partner — інноваційна платформа для автоматизації подій: продаж квитків, реєстрація через Telegram, QR-сканування.">
-  <meta name="keywords" content="події, квитки, Telegram, автоматизація, Україна, організація заходів">
+  <meta name="keywords" content="події, квитки, Telegram, автоматизація, Україна, організація заходів, арбітраж трафіку">
   <meta property="og:title" content="TP Tickets Partner">
   <meta property="og:description" content="Автоматизація подій через Telegram: швидка реєстрація, продаж квитків, QR-сканування.">
   <meta property="og:image" content="https://i.ibb.co/mrzTy4qx/image.png">
@@ -21,13 +21,13 @@
   <style>
     body {
       font-family: 'Manrope', sans-serif;
-      background: linear-gradient(150deg, #080C14 0%, #1E293B 100%);
+      background: linear-gradient(150deg, #1A2A44 0%, #1E293B 100%);
       color: #F5F7FA;
       overflow-x: hidden;
       line-height: 1.6;
     }
     .frosted-glass {
-      background: rgba(15, 23, 42, 0.25);
+      background: rgba(15, 23, 42, 0.3);
       backdrop-filter: blur(var(--blur, 20px));
       -webkit-backdrop-filter: blur(var(--blur, 20px));
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -43,7 +43,7 @@
       top: 0;
       z-index: 50;
     }
-    .scroll-to-top {
+    .scroll-to-top, .chat-button {
       position: fixed;
       bottom: 32px;
       right: 32px;
@@ -51,20 +51,27 @@
       transition: opacity 0.3s, transform 0.3s;
       touch-action: manipulation;
     }
-    .scroll-to-top.visible {
+    .chat-button {
+      bottom: 96px;
+      background: linear-gradient(45deg, #00FF85, #FF4D4F);
+      padding: 16px;
+      border-radius: 50%;
+    }
+    .scroll-to-top.visible, .chat-button.visible {
       opacity: 1;
     }
     .text-shadow-xl {
-      text-shadow: 0 6px 15px rgba(0, 255, 133, 0.3);
+      text-shadow: 0 6px 15px rgba(0, 255, 133, 0.4);
     }
     .btn-cta {
+      background: linear-gradient(45deg, #00FF85, #FF4D4F);
       transition: transform 0.3s ease, box-shadow 0.3s;
-      box-shadow: 0 0 15px rgba(0, 255, 133, 0.4);
+      box-shadow: 0 0 15px rgba(0, 255, 133, 0.5);
       min-height: 60px;
     }
     .btn-cta:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(0, 255, 133, 0.6);
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 255, 133, 0.7);
     }
     .btn-cta:focus-visible {
       outline: 2px solid #00FF85;
@@ -90,36 +97,64 @@
     .icon-anim {
       transition: transform 0.6s, opacity 0.6s;
     }
+    .stars-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/7kLqY3z/stars.png') repeat;
+      opacity: 0.3;
+      animation: twinkle 10s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+    }
     @keyframes glow {
       0%, 100% { opacity: 0.7; }
       50% { opacity: 1; }
     }
-    @media (max-width: 640px) {
+    /* Адаптивність */
+    @media (max-width: 480px) {
+      :root { --blur: 6px; }
+      .text-8xl { font-size: 2.5rem; }
+      .text-6xl { font-size: 2rem; }
+      .text-3xl { font-size: 1.25rem; }
+      .text-lg { font-size: 0.875rem; }
+      .py-24 { padding-top: 3rem; padding-bottom: 3rem; }
+      .px-6 { padding-left: 1rem; padding-right: 1rem; }
+      .gap-12 { gap: 1rem; }
+      .gap-8 { gap: 0.75rem; }
+      .planet-container { transform: translateX(0); height: 180px; }
+      .nav-links { display: none; }
+      .burger-menu { display: block; }
+      .swiper-slide { padding: 1rem !important; }
+    }
+    @media (max-width: 768px) {
       :root { --blur: 8px; }
       .text-8xl { font-size: 3.5rem; }
       .text-6xl { font-size: 2.5rem; }
       .text-3xl { font-size: 1.5rem; }
-      .text-lg { font-size: 1rem; }
       .py-24 { padding-top: 4rem; padding-bottom: 4rem; }
-      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
       .gap-12 { gap: 1.5rem; }
-      .planet-container { transform: translateX(0); }
-      .nav-links { display: none; }
-      .burger-menu { display: block; }
+      .planet-container { height: 240px; }
     }
     @media (max-width: 1024px) {
-      .text-8xl { font-size: 4.5rem; }
+      .text-8xl { font-size: 4rem; }
       .text-6xl { font-size: 3rem; }
       .py-24 { padding-top: 5rem; padding-bottom: 5rem; }
-      .gap-12 { gap: 2.5rem; }
+      .gap-12 { gap: 2rem; }
     }
     @media (min-width: 1280px) {
       :root { --blur: 20px; }
-      .planet-container { transform: translateX(-20%); }
+      .planet-container { transform: translateX(-20%); height: 400px; }
       .burger-menu { display: none; }
     }
-    @media (max-width: 280px) {
-      .planet-container { height: 200px; }
+    @media (min-width: 1920px) {
+      .container { max-width: 1600px; }
+      .text-8xl { font-size: 6rem; }
+      .text-6xl { font-size: 4rem; }
     }
   </style>
 </head>
@@ -133,12 +168,13 @@
         <a href="#pricing" class="text-lg font-medium hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="Ціна">Ціна</a>
         <a href="#reviews" class="text-lg font-medium hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="Відгуки">Відгуки</a>
         <a href="#how-to-start" class="text-lg font-medium hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="Як почати">Як почати</a>
+        <a href="#affiliate" class="text-lg font-medium hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="Партнерська програма">Партнерська програма</a>
         <a href="#faq" class="text-lg font-medium hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="FAQ">FAQ</a>
       </nav>
       <button class="burger-menu lg:hidden text-green-400" @click="menuOpen = !menuOpen" aria-label="Toggle menu" aria-expanded="false" :aria-expanded="menuOpen">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
       </button>
-      <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta hidden lg:block bg-green-400 text-black px-12 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors" aria-label="Спробувати">Спробувати</a>
+      <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta hidden lg:block text-black px-12 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors" aria-label="Спробувати">Спробувати</a>
     </div>
     <!-- Mobile Menu -->
     <div x-show="menuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-1" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-1" x-transition:leave-end="opacity-0 transform scale-y-0" @click.outside="menuOpen = false" class="lg:hidden frosted-glass mt-4 mx-6 px-6 py-6">
@@ -147,6 +183,7 @@
         <a href="#pricing" class="font-semibold hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" @click="menuOpen = false" aria-label="Ціна">Ціна</a>
         <a href="#reviews" class="font-semibold hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" @click="menuOpen = false" aria-label="Відгуки">Відгуки</a>
         <a href="#how-to-start" class="font-semibold hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" @click="menuOpen = false" aria-label="Як почати">Як почати</a>
+        <a href="#affiliate" class="font-semibold hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" @click="menuOpen = false" aria-label="Партнерська програма">Партнерська програма</a>
         <a href="#faq" class="font-semibold hover:text-green-400 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" @click="menuOpen = false" aria-label="FAQ">FAQ</a>
         <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta bg-green-400 text-black px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors" @click="menuOpen = false" aria-label="Спробувати">Спробувати</a>
       </nav>
@@ -154,11 +191,12 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center" role="banner">
+  <section class="min-h-screen flex items-center justify-center relative overflow-hidden" role="banner">
+    <div class="stars-bg"></div>
     <div class="container mx-auto px-6 max-w-9xl flex flex-col lg:flex-row items-center gap-12">
       <div class="planet-container lg:w-2/5">
-        <div id="three-3d" class="h-[220px] sm:h-[320px] lg:h-[400px] mx-auto"></div>
-        <div id="three-fallback" class="hidden h-[220px] sm:h-[320px] lg:h-[400px] mx-auto">
+        <div id="three-3d" class="h-[180px] sm:h-[240px] md:h-[320px] lg:h-[400px] mx-auto"></div>
+        <div id="three-fallback" class="hidden h-[180px] sm:h-[240px] md:h-[320px] lg:h-[400px] mx-auto">
           <svg class="w-full h-full" viewBox="0 0 100 100">
             <path d="M50 20C30 20 15 35 15 50C15 65 30 80 50 80C70 80 85 65 85 50C85 35 70 20 50 20Z" fill="none" stroke="#00FF85" stroke-width="2" class="animate-glow"/>
             <path d="M50 45L55 50L50 55" fill="none" stroke="#F5F7FA" stroke-width="2" class="animate-glow"/>
@@ -169,8 +207,8 @@
       </div>
       <div class="lg:w-3/5 text-center lg:text-left">
         <h1 class="text-8xl font-extrabold mb-6 text-white text-shadow-xl animate-hero">TP Tickets Partner</h1>
-        <p class="text-3xl font-medium mb-8 text-gray-300 animate-hero delay-200">Автоматизація подій нового покоління через Telegram</p>
-        <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta bg-green-400 text-black px-12 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors animate-hero delay-400" aria-label="Спробувати безкоштовно">Спробувати безкоштовно</a>
+        <p class="text-3xl font-medium mb-8 text-gray-300 animate-hero delay-200">Запустіть подію на орбіту через Telegram</p>
+        <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta text-black px-12 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors animate-hero delay-400" aria-label="Спробувати безкоштовно">Спробувати безкоштовно</a>
       </div>
     </div>
   </section>
@@ -263,13 +301,49 @@
           <h3 class="text-3xl font-semibold mb-4 text-white">Free</h3>
           <p class="text-4xl font-bold mb-4 text-white">$0</p>
           <p class="text-base text-gray-300 mb-6">Для безкоштовних та благодійних подій</p>
-          <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta block bg-green-400 text-black px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors" aria-label="Почати Free">Почати</a>
+          <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta block text-black px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors" aria-label="Почати Free">Почати</a>
         </div>
         <div class="p-8 rounded-3xl frosted-glass animate-fade delay-600">
           <h3 class="text-3xl font-semibold mb-4 text-white">Pro</h3>
           <p class="text-4xl font-bold mb-4 text-white">6%</p>
           <p class="text-base text-gray-300 mb-6">Повний функціонал для комерційних подій</p>
-          <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta block bg-green-500 text-white px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-600 transition-colors" aria-label="Почати Pro">Почати</a>
+          <a href="https://t.me/TPTicketsBot" target="_blank" class="btn-cta block text-white px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-600 transition-colors" aria-label="Почати Pro">Почати</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate Section -->
+  <section id="affiliate" class="py-24" role="region" aria-label="Партнерська програма">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <h2 class="text-6xl font-bold text-center mb-6 text-white animate-fade">Стань партнером</h2>
+      <p class="text-lg text-center font-medium mb-12 text-gray-300 animate-fade delay-200">Заробляй, залучаючи клієнтів!</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-8 rounded-3xl frosted-glass animate-fade delay-400">
+          <h3 class="text-3xl font-semibold mb-6 text-white">Як це працює?</h3>
+          <ul class="space-y-6">
+            <li class="flex items-center">
+              <svg class="w-8 h-8 mr-4 text-green-400 icon-anim" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+              Отримай унікальне реферальне посилання
+            </li>
+            <li class="flex items-center">
+              <svg class="w-8 h-8 mr-4 text-green-400 icon-anim delay-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+              Пошир у соцмережах або через рекламу
+            </li>
+            <li class="flex items-center">
+              <svg class="w-8 h-8 mr-4 text-green-400 icon-anim delay-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+              Отримуй 10% або безкоштовний квиток
+            </li>
+          </ul>
+        </div>
+        <div class="p-8 rounded-3xl frosted-glass animate-fade delay-600">
+          <h3 class="text-3xl font-semibold mb-6 text-white">Зареєструйся</h3>
+          <form action="https://t.me/TPTicketsBot" method="POST" class="space-y-4">
+            <input type="text" placeholder="Ваше ім'я" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
+            <input type="email" placeholder="Ваш email" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
+            <input type="text" placeholder="Ваш Telegram" class="w-full p-4 rounded-xl bg-gray-800 text-white" required>
+            <button type="submit" class="btn-cta w-full text-black px-10 py-5 rounded-3xl text-lg font-semibold hover:bg-green-500 transition-colors">Стати партнером</button>
+          </form>
         </div>
       </div>
     </div>
@@ -277,24 +351,24 @@
 
   <!-- Reviews Section -->
   <section id="reviews" class="py-24" role="region" aria-label="Відгуки">
-    <div class="container mx-auto px-6 max-w-4xl">
+    <div class="container mx-auto px-6 max-w-5xl">
       <h2 class="text-6xl font-bold text-center mb-6 text-white animate-fade">Що кажуть організатори?</h2>
       <p class="text-lg text-center font-medium mb-12 text-gray-300 animate-fade delay-200">Думки тих, хто вже з нами</p>
       <div class="swiper reviews-slider">
         <div class="swiper-wrapper">
-          <div class="swiper-slide p-8 rounded-3xl frosted-glass text-center animate-fade delay-400">
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-400">
             <p class="italic text-lg text-gray-300">"Зекономила години рутини!"</p>
             <p class="mt-6 font-semibold text-white">Емілія, організатор мітапів</p>
           </div>
-          <div class="swiper-slide p-8 rounded-3xl frosted-glass text-center animate-fade delay-600">
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-600">
             <p class="italic text-lg text-gray-300">"Гості люблять квитки в Telegram."</p>
             <p class="mt-6 font-semibold text-white">Андрій, Marketing Coffee</p>
           </div>
-          <div class="swiper-slide p-8 rounded-3xl frosted-glass text-center animate-fade delay-800">
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-800">
             <p class="italic text-lg text-gray-300">"Реєстрація стала швидшою!"</p>
             <p class="mt-6 font-semibold text-white">Данило, воркшопи</p>
           </div>
-          <div class="swiper-slide p-8 rounded-3xl frosted-glass text-center animate-fade delay-1000">
+          <div class="swiper-slide p-10 rounded-3xl frosted-glass text-center animate-fade delay-1000">
             <p class="italic text-lg text-gray-300">"100 гостей — ідеально!"</p>
             <p class="mt-6 font-semibold text-white">Аліна, Wtech</p>
           </div>
@@ -357,6 +431,8 @@
         <div class="p-8 rounded-3xl frosted-glass animate-fade delay-800">
           <h3 class="text-xl font-semibold mb-2 cursor-pointer flex justify-between items-center text-white" @click="open = open === 3 ? null : 3" aria-expanded="false" :aria-expanded="open === 3">
             Як продавати квитки через Telegram?
+            <svg class="w-6 h-6 text-gray-300 transition-transform" :class="{ 'rotate-180': open === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24  intimately" :aria-expanded="open === 3">
+            Як продавати квитки через Telegram?
             <svg class="w-6 h-6 text-gray-300 transition-transform" :class="{ 'rotate-180': open === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </h3>
           <p x-show="open === 3" x-transition.scale.duration.400ms class="text-base text-gray-300">Бот обробляє оплати автоматично.</p>
@@ -404,6 +480,10 @@
         <a href="mailto:support@tpticketspartner.com" class="text-green-400 hover:text-green-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="Email">
           <svg class="w-12 h-12 icon-anim" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
         </a>
+        <div class="flex flex-col items-center">
+          <p class="text-lg text-gray-300 mb-2">Скануй для швидкого доступу</p>
+          <img src="https://i.ibb.co/7zqX3kQ/qr-code.png" alt="QR-код для Telegram-бота" class="w-32 h-32">
+        </div>
       </div>
     </div>
   </footer>
@@ -413,11 +493,16 @@
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
   </button>
 
+  <!-- Chat Button -->
+  <a href="https://t.me/TPTicketsBot" target="_blank" class="chat-button visible text-white p-4 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-green-400" aria-label="Chat with us">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.54 7.54l-6.1 7.88c-.15.56-.59.73-1.17.14l-2.54-1.86-1.22 1.17c-.3.13-.26.17-.39.17l.17-3.56 5.61-5.07c.22-.2.1-.56-.27-.56l-6.93 4.37-2.54-.78c-.56-.17-.73-.73-.34-1.17l9.83-5.66c.46-.27 1.02.02 1.1.56z"></path></svg>
+  </a>
+
   <script>
     // GSAP Animations
     gsap.from(".animate-hero", { opacity: 0, y: 40, scale: 0.95, duration: 1.2, stagger: 0.3, ease: "power3.out" });
     gsap.from(".animate-fade", { opacity: 0, y: 60, duration: 0.8, stagger: 0.2, ease: "power2.out", scrollTrigger: { trigger: ".animate-fade", start: "top 75%", once: true } });
-    gsap.from(".icon-anim", { rotation: 180, opacity: 0, duration: 0.7, stagger: 0.1, ease: "back.out(1.7)" });
+    gsap.from(".icon-anim", { rotation: 360, opacity: 0, duration: 0.7, stagger: 0.1, ease: "back.out(1.7)" });
 
     // Scroll to Top
     const scrollToTop = document.querySelector("#scroll-to-top");
@@ -431,13 +516,18 @@
     // Swiper Slider
     new Swiper(".reviews-slider", {
       slidesPerView: 1,
-      spaceBetween: 32,
+      spaceBetween: 24,
       loop: true,
-      autoplay: { delay: 4500, disableOnInteraction: true },
-      effect: "fade",
-      fadeEffect: { crossFade: true },
+      autoplay: { delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      effect: "coverflow",
+      coverflowEffect: { rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false },
       pagination: { el: ".swiper-pagination", clickable: true },
-      touchRatio: 1.5
+      touchRatio: 1.5,
+      breakpoints: {
+        640: { slidesPerView: 1, spaceBetween: 16 },
+        768: { slidesPerView: 2, spaceBetween: 24 },
+        1024: { slidesPerView: 3, spaceBetween: 32 }
+      }
     });
 
     // Three.js Planet
@@ -449,33 +539,35 @@
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      const size = window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 220 : 320) : 400;
+      const size = window.innerWidth <= 1024 ? (window.innerWidth <= 768 ? (window.innerWidth <= 480 ? 180 : 240) : 320) : 400;
       renderer.setSize(size, size);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
 
       // Planet
       const isHighPerf = window.devicePixelRatio >= 1.5;
-      const geometry = new THREE.SphereGeometry(1.5, isHighPerf ? 96 : 24, isHighPerf ? 96 : 24);
-      const texture = new THREE.TextureLoader().load("https://i.ibb.co/0X4k9ZJ/planet-map.jpg");
+      const geometry = new THREE.SphereGeometry(1.5, isHighPerf ? 64 : 32, isHighPerf ? 64 : 32);
+      const texture = new THREE.TextureLoader().load("https://i.ibb.co/3zqX3kQ/ua-europe-map.jpg");
       const material = new THREE.MeshStandardMaterial({
         map: texture,
-        roughness: 0.6,
-        metalness: 0.3
+        roughness: 0.5,
+        metalness: 0.2,
+        emissive: 0x00FF85,
+        emissiveIntensity: 0.1
       });
       planet = new THREE.Mesh(geometry, material);
       scene.add(planet);
 
       // Lighting
-      const pointLight = new THREE.PointLight(0xFFFFFF, 2.0, 10);
+      const pointLight = new THREE.PointLight(0xFFFFFF, 2.5, 10);
       pointLight.position.set(5, 5, 5);
       scene.add(pointLight);
-      const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.6);
+      const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.8);
       scene.add(ambientLight);
 
       // Arrows
       const arrowGeometry = new THREE.ConeGeometry(0.06, 0.25, 32);
-      const arrowMaterial = new THREE.MeshStandardMaterial({ color: 0x00FF85, emissive: 0x00FF85, emissiveIntensity: 0.8 });
+      const arrowMaterial = new THREE.MeshStandardMaterial({ color: 0xFF4D4F, emissive: 0xFF4D4F, emissiveIntensity: 0.8 });
       const arrowPositions = [
         { pos: [0.9, 0.3, 1.5], label: "Kyiv" },
         { pos: [-0.6, 0.5, 1.5], label: "Warsaw" },
@@ -497,10 +589,10 @@
         if (!container.isConnected) return;
         requestAnimationFrame(animate);
         time += 0.02;
-        planet.rotation.y += 0.0015;
-        planet.rotation.x += 0.0003 * Math.sin(time);
+        planet.rotation.y += 0.001;
+        planet.rotation.x += 0.0002 * Math.sin(time);
         arrows.forEach((arrow, i) => {
-          gsap.to(arrow.scale, { x: 0.9 + 0.2 * Math.sin(time + i), y: 0.9 + 0.2 * Math.sin(time + i), z: 0.9 + 0.2 * Math.sin(time + i), duration: 1, yoyo: true, repeat: -1 });
+          gsap.to(arrow.scale, { x: 0.8 + 0.3 * Math.sin(time + i), y: 0.8 + 0.3 * Math.sin(time + i), z: 0.8 + 0.3 * Math.sin(time + i), duration: 0.8, yoyo: true, repeat: -1 });
         });
         renderer.render(scene, camera);
       }
@@ -555,7 +647,7 @@
 
     // Resize
     window.addEventListener("resize", () => {
-      const size = window.innerWidth <= 1024 ? (window.innerWidth <= 640 ? 220 : 320) : 400;
+      const size = window.innerWidth <= 1024 ? (window.innerWidth <= 768 ? (window.innerWidth <= 480 ? 180 : 240) : 320) : 400;
       if (renderer) {
         renderer.setSize(size, size);
         camera.aspect = 1;
